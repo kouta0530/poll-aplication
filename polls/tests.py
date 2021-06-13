@@ -29,3 +29,11 @@ class QuestionModelTests(TestCase):
 def create_question(question_text, days):
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
+
+
+class QuestionIndexViewTests(TestCase):
+    def test_no_questions(self):
+        reponse = self.client.get(reverse('polls:index'))
+        self.assertEqueal(response.status_code, 200)
+        self.assertContains(response, "No polls are available")
+        self.assertQuerysetEqual(response.context["latest_question_list"])
