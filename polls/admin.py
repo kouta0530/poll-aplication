@@ -16,6 +16,7 @@ class QuestionAdmin(admin.ModelAdmin):
          'pub_date'], 'classes': ['collapse']}),
     ]
     list_display = ('question_text', 'pub_date', 'was_published_recently')
+    list_filter = ['pub_date']
     inlines = [ChoiceInline]
 
 
